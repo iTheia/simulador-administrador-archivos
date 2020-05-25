@@ -1,24 +1,72 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import uuid from "uuid/dist/v4";
+import Simulador from './containers/Simulador'
+
+const columnsFromBackend = {
+  [uuid()]: {
+    name: "Archivos",
+    items: [
+      { id: uuid(), type:'doc', size:51123, content:'KB'},
+      { id: uuid(), type:'ppt', size:51211,content:'KB'},
+      { id: uuid(), type:'jpg', size:51567,content:'KB'},
+      { id: uuid(), type:'mp3', size:51643,content:'KB'},
+      { id: uuid(), type:'mp4', size:5413,content:'KB'},
+      { id: uuid(), type:'pdf', size:52323,content:'KB'},
+    ],
+    size: 4294967296,
+    fileSystem:{
+      clusterSize:4096,
+      name:'',
+      clusters:[],
+      negativeSpace:'',
+      maxFileSize:'15'
+    },
+  },
+  [uuid()]: {
+    name: "PC 1",
+    size: 4294967296,
+    fileSystem:{
+      clusterSize:4096,
+      name:'FAT',
+      clusters:[],
+      negativeSpace:'',
+      auth:false,
+      maxFileSize:'15'
+    },
+    items: []
+  },
+  [uuid()]: {
+    name: "PC 2",
+    size: 8589934592,
+    fileSystem:{
+      clusterSize:262144,
+      negativeSpace:'',
+      name:'FAT32',
+      clusters:[],
+      auth:false,
+      maxFileSize:'15'
+    },
+    items: []
+  },
+  [uuid()]: {
+    name: "PC 3",
+    size: 8589934592,
+    fileSystem:{
+      clusterSize:32768,
+      name:'NTFS',
+      auth:true,
+      clusters:[],
+      maxFileSize:'15'
+    },
+    items: []
+  }
+};
 
 function App() {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+      <Simulador data={columnsFromBackend} fileSystem="FAT"/>
     </div>
   );
 }
