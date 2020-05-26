@@ -6,7 +6,7 @@ import Board from '../components/Board'
 export default function Simulador({data}) {
     const [columns, setColumns] = useState(data);
     return (
-        <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
+        <div style={{ display: "flex", alignItems:'center' }}>
         <DragDropContext onDragEnd={result => onDragEnd(result, columns, setColumns)}>
             {Object.entries(columns).map(([columnId, column], index) => <Board key={index} column={column} columnId={columnId} />)}
         </DragDropContext>
@@ -28,6 +28,9 @@ function onDragEnd (result, columns, setColumns) {
         sourceItems.splice(source.index, 0 ,{...removed, id:uuid()})
       }
       if (destColumn.name !== "Archivos") {
+        if(removed.size > destColumn.fileSystem.maxFileSize){
+          return
+        }
         destItems.splice(destination.index, 0, removed);
       }
       fillCluster(destColumn, removed)

@@ -31,7 +31,7 @@ const columnsFromBackend = {
       clusters:[],
       negativeSpace:'',
       auth:false,
-      maxFileSize:'15'
+      maxFileSize:16777216
     },
     items: []
   },
@@ -44,7 +44,7 @@ const columnsFromBackend = {
       name:'FAT32',
       clusters:[],
       auth:false,
-      maxFileSize:'15'
+      maxFileSize:4294967296
     },
     items: []
   },
@@ -56,7 +56,7 @@ const columnsFromBackend = {
       name:'NTFS',
       auth:true,
       clusters:[],
-      maxFileSize:'15'
+      maxFileSize:17592186044416
     },
     items: []
   }
@@ -65,7 +65,10 @@ const columnsFromBackend = {
 function App() {
   
   return (
-    <div >
+    <div className="app">
+      <div className="relleno">
+
+      </div>
       <Simulador data={columnsFromBackend} fileSystem="FAT"/>
     </div>
   );
